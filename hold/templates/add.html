@@ -1,0 +1,28 @@
+amount{% extends "base.html" %}
+{% from "form_macros.html" import render_field %}
+
+{% block title %}
+High or Low day -- Add a Food Type
+{%  endblock %}
+
+{% block content %}
+    <section>
+      <h1>add new food type</h1>
+      <form action="" method="post">
+          {{form.hidden_tag()}}
+          <table>
+              {{ render_field(form.food_word, size=20) }}
+              {{ render_field(form.amount, size=5) }}
+
+              <tr class="submit">
+                  <td></td>
+                  <td><button type="submit">Submit</button>
+                  </td>
+              </tr>
+          </table>
+      </form>
+    </section>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}

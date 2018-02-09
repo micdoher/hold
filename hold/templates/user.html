@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+High or Low day -- {{ user.username }}
+{%  endblock %}
+
+{% block content %}
+    <article>
+        <header>
+             <h1>Details of food added by {{ user.username }}</h1>
+
+            <ul>
+                {% for bm in user.bookmarks %}
+                    <li>
+                        <a href="{{ bm.food_word }}">{{ bm.amount }} {{ bm.food_word }}</a> <br>
+                        <span class="timestamp">Added at {{ bm.date }}</span>
+                    </li>
+                {% else %}
+                    <li>This user has not added any bookmarks yet.</li>
+                {% endfor %}
+            </ul>
+        </header>
+
+    </article>
+{% endblock %}
