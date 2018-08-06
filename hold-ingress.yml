@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hold-ingress
+spec:
+  tls:
+  - hosts:
+    - hold.micdoher.com
+    secretName: hold-secret
+  rules:
+  - host: hold.micdoher.com
+    http:
+      paths:
+      - path: /app
+        backend:
+          serviceName: hold-core-svc
+          servicePort: 80
+      - path: /db
+        backend:
+          serviceName: hold-pg-db-svc
+          servicePort: 80

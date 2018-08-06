@@ -6,14 +6,19 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from hold import db
 
 
-eaten = ['chillies','peppers','sweets','avocados', 'banana', 'milk']
+eaten = ['chillies','peppers','sweets','avocados', 'banana', 'milk', 'bread', 'nutella', 'olive oil', 'orange juice', 'pancakes']
+mood = ['high', 'low', 'energetic', 'tired']
 
 
 class Bookmark(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    food_word = db.Column(db.Text, nullable=False)
+    food_word_1 = db.Column(db.Text, nullable=False)
+    food_word_2 = db.Column(db.Text, nullable=False)
+    food_word_3 = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, default=datetime.utcnow)
     amount = db.Column(db.Integer, nullable=False)
+    weather = db.Column(db.Text, nullable=True)
+    mood = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     @staticmethod
@@ -21,7 +26,7 @@ class Bookmark(db.Model):
         return Bookmark.query.order_by(desc(Bookmark.date)).limit(num)
 
     def __repr__(self):
-        return "<Bookmark '{}': '{}'>".format(self.amount, self.food)
+        return "<Bookmark '{}': '{}'>".format(self.amount, self.food, self)
 
 
 class User(db.Model, UserMixin):

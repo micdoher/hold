@@ -5,12 +5,18 @@ from wtforms.validators import Length, Email, Regexp, DataRequired, EqualTo,\
     url, ValidationError, AnyOf
 
 from models import User
-#Create allowable food
-eaten = ['chillies','peppers','sweets','avocados', 'banana', 'milk']
+#Create allowable attributes
+eaten = ['chillies','peppers','sweets','avocados', 'banana', 'milk', 'bread', 'nutella', 'olive oil', 'orange juice', 'pancakes']
+moods = ['high', 'low', 'tired', 'energetic']
+weather = ['sunny', 'cloudy', 'rainy', 'mixed']
 
 class BookmarkForm(Form):
-    food_word = StringField('add the food type you have eaten here:', validators=[DataRequired(), AnyOf(eaten)])
+    food_word_1 = StringField('add the happy food type you have eaten here:', validators=[DataRequired(), AnyOf(eaten)])
+    food_word_2 = StringField('add the 2nd food type you have eaten here:', validators=[DataRequired(), AnyOf(eaten)])
+    food_word_3 = StringField('add the 3rd food type you have eaten here:', validators=[DataRequired(), AnyOf(eaten)])
     amount = IntegerField('add the quantity here:', validators=[DataRequired()])
+    weather = StringField('what is the weather like now?:', validators=[DataRequired(), AnyOf(weather)])
+    mood = StringField('Are you feeling good today as it is friday?', validators=[DataRequired(), AnyOf(moods)])
 
 class LoginForm(Form):
     username = StringField('Your Username:', validators=[DataRequired()])

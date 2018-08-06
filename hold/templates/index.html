@@ -18,7 +18,7 @@ High or Low day -- Welcome
                         {% for bm in new_bookmarks %}
                             <li>
                                 <a href='{{ url_for('user', username=bm.user.username) }}'>
-                                    {{ bm.user.username }}</a> added </a> {{ bm.amount }} portions of {{ bm.food_word }}
+                                    {{ bm.user.username }}</a> has been eating some </a> {{ bm.food_word_1}}, {{bm.food_word_2}}, {{bm .food_word_3}}
                         {% endfor %}
                     </ul>
                 {% else %}

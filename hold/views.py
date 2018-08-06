@@ -11,10 +11,6 @@ def load_user(userid):
     return User.query.get(int(userid))
 
 
-# Create allowed food list
-eaten = ['chillies','peppers','sweets','avocados', 'banana', 'milk']
-
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -26,12 +22,16 @@ def index():
 def add():
     form = BookmarkForm()
     if form.validate_on_submit():
-        food_word = form.food_word.data
+        food_word_1 = form.food_word_1.data
+        food_word_2 = form.food_word_2.data
+        food_word_3 = form.food_word_3.data
         amount = form.amount.data
-        bm = Bookmark(user=current_user, food_word=food_word, amount=amount)
+        weather = form.weather.data
+        mood = form.mood.data
+        bm = Bookmark(user=current_user, food_word_1=food_word_1, food_word_2=food_word_2, food_word_3=food_word_3, amount=amount, weather=weather, mood=mood)
         db.session.add(bm)
         db.session.commit()
-        flash("Stored '{}'".format(food_word))
+#        flash("Stored '{}'".format(food_word_1, food_word_2, food_word_3 ))
         return redirect(url_for('index'))
     return render_template('add.html', form=form)
 

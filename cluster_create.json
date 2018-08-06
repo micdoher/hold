@@ -1,0 +1,31 @@
+{
+  "provider_client_config_uuid": "fb532a2a-96bd-42f1-962f-a4a9e94a1f5d",
+  "type": 1,
+  "cluster": "hx-hybrid",
+  "name": "micdoher2",
+  "description": "",
+  "workers": 2,
+  "masters": 1,
+  "vcpus": 2,
+  "memory": 8192,
+  "datacenter": "Pittsburgh",
+  "datastore": "ccp-vpp",
+  "networks": [
+    "cloud-dvs/skunkworks=CCP=tenant"
+  ],
+  "resource_pool": "hx-hybrid/Resources",
+  "template": "",
+  "ssh_user": "ccpuser",
+  "ssh_key": "",
+  "deployer_type": "kubeadm",
+  "kubernetes_version": "1.9.2",
+  "deployer": {
+    "provider_type": "vsphere",
+    "provider": {
+      "vsphere_datacenter": "Pittsburgh",
+      "vsphere_datastore": "ccp-vpp",
+      "vsphere_client_config_uuid": "fb532a2a-96bd-42f1-962f-a4a9e94a1f5d",
+      "vsphere_working_dir": "\/Pittsburgh\/vm"
+    }
+  }
+}

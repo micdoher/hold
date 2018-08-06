@@ -12,7 +12,7 @@ High or Low day -- {{ user.username }}
             <ul>
                 {% for bm in user.bookmarks %}
                     <li>
-                        <a href="{{ bm.food_word }}">{{ bm.amount }} {{ bm.food_word }}</a> <br>
+                        <a href="{{ bm.food_word }}">{{ bm.amount }} {{ bm.food_word_1 }} {{ bm.food_word_2 }} {{ bm.food_word_3 }} with a mood of {{ bm.mood }} </a> <br>
                         <span class="timestamp">Added at {{ bm.date }}</span>
                     </li>
                 {% else %}

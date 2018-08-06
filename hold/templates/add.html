@@ -11,8 +11,12 @@ High or Low day -- Add a Food Type
       <form action="" method="post">
           {{form.hidden_tag()}}
           <table>
-              {{ render_field(form.food_word, size=20) }}
+              {{ render_field(form.food_word_1, size=20) }}
+              {{ render_field(form.food_word_2, size=20) }}
+              {{ render_field(form.food_word_3, size=20) }}
               {{ render_field(form.amount, size=5) }}
+              {{ render_field(form.weather, size=20) }}
+				  {{ render_field(form.mood, size=20) }}
 
               <tr class="submit">
                   <td></td>

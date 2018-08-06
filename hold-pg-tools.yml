@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine
+  namespace: default
+spec:
+  containers:
+  - image: alpine:3.2
+    volumeMounts:
+      - name: hold-pg-data
+        mountPath: /var/lib/hold
+        subPath: data
+    command:
+      - /bin/sh
+      - "-c"
+      - "sleep 60m"
+    imagePullPolicy: IfNotPresent
+    name: alpine
+
+  volumes:
+    - name: hold-pg-data
+      persistentVolumeClaim:
+        claimName: hold-hx-pvc

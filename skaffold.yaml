@@ -1,0 +1,18 @@
+apiVersion: skaffold/v1alpha2
+kind: Config
+build:
+  artifacts:
+  - imageName: micdoher/hold
+    workspace: ./
+  local:
+    # Pushing the images can be skipped. If no value is specified, it'll default to
+    # `true` on minikube or Docker for Desktop, for even faster build and deploy cycles.
+    # `false` on other types of kubernetes clusters that require pushing the images.
+    # Skaffold defers to your ~/.docker/config for authentication information.
+    # If you're using Google Container Registry, make sure that you have gcloud and
+    # docker-credentials-helper-gcr configured correctly.
+    skipPush: false
+deploy:
+  kubectl:
+    manifests:
+      - hold-core.yml
