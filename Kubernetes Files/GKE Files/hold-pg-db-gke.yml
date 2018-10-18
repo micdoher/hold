@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hold-pg-db
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hold-pg-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:9.4
+           # command: [ "/bin/bash", "-c", "--" ]
+           # args: [ "while true; do sleep 30; done;" ]
+        volumeMounts:
+          - name: hold-pg-data
+            mountPath: /var/lib/postgresql/data
+#            subPath: pgdata
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: pguser
+        - name: POSTGRES_PASSWORD
+          value: password
+
+      volumes:
+        - name: hold-pg-data
+          persistentVolumeClaim:
+            claimName: hold-pg-db-gke

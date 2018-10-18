@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hold-ingress
+spec:
+  rules:
+  # - host: hold.com
+   - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hold-core-svc
+          servicePort: 5000
+      - path: /db
+        backend:
+          serviceName: hold-pg-db-svc
+          servicePort: 5342
