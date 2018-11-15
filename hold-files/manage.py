@@ -21,4 +21,5 @@ def dropdb():
         print 'Dropped the database'
 
 if __name__ == '__main__':
+
     manager.run()

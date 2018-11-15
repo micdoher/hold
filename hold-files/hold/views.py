@@ -22,6 +22,7 @@ def index():
 def add():
     form = BookmarkForm()
     if form.validate_on_submit():
+        # time_of_day = form.time_of_day.data
         food_word_1 = form.food_word_1.data
         food_word_2 = form.food_word_2.data
         food_word_3 = form.food_word_3.data
@@ -30,7 +31,7 @@ def add():
         amount_3 = form.amount_3.data
         weather = form.weather.data
         mood = form.mood.data
-        bm = Bookmark(user=current_user, food_word_1=food_word_1, food_word_2=food_word_2, food_word_3=food_word_3, amount_1=amount_1, amount_2=amount_2,amount_3=amount_3,weather=weather, mood=mood)
+        bm = Bookmark(user=current_user, food_word_1=food_word_1, food_word_2=food_word_2, food_word_3=food_word_3, amount_1=amount_1, amount_2=amount_2, amount_3=amount_3, weather=weather, mood=mood)
         db.session.add(bm)
         db.session.commit()
 #        flash("Stored '{}'".format(food_word_1, food_word_2, food_word_3 ))

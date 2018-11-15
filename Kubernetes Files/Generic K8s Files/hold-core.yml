@@ -16,18 +16,7 @@ spec:
     spec:
       containers:
       - name: holdk8s
-        image: micdoher/hold:tsenv5
-        # env:
-        #   - name: POSTGRES_USER
-        #     valueFrom:
-        #       secretKeyRef:
-        #         name: hold-db-user-pass
-        #         key: username
-        #   - name: POSTGRES_PW
-        #     valueFrom:
-        #       secretKeyRef:
-        #         name: hold-db-user-pass
-        #         key: password
+        image: micdoher/hold:nov14thtest10
 
         imagePullPolicy: "IfNotPresent"
 

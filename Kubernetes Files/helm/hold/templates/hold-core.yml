@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: holdk8s
-        image: micdoher/hold:bc08bf441590704baaae6bfb11986c2636dec9a1aa38483a56d87eb0b7ece5e7
+        image: micdoher/hold:4thoct
         imagePullPolicy: "IfNotPresent"
         ports:
           - containerPort: 5000

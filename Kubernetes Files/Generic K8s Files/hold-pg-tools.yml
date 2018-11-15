@@ -8,12 +8,12 @@ spec:
   - image: alpine:3.2
     volumeMounts:
       - name: hold-pg-data
-        mountPath: /var/lib/hold
-        subPath: data
+        mountPath: var/lib/postgresql/data
     command:
       - /bin/sh
       - "-c"
-      - "sleep 60m"
+      - "rm -fr /var/lib/postgresql/data/*"
+      # - "sleep 5m"
     imagePullPolicy: IfNotPresent
     name: alpine
 

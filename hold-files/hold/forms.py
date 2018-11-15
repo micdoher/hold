@@ -2,22 +2,24 @@ from flask_wtf import Form
 from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.fields import IntegerField
 from wtforms.validators import Length, Email, Regexp, DataRequired, EqualTo,\
-    url, ValidationError, AnyOf
+    url, ValidationError, AnyOf, Optional
 
 from models import User
 #Create allowable attributes
-eaten = ['chillies','peppers','sweets','avocados', 'banana', 'milk', 'bread', 'nutella', 'olive oil', 'orange juice', 'pancakes']
-moods = ['high', 'low', 'tired', 'energetic']
+time = ['morning', 'lunch', 'dinner', 'bedtime']
+eaten = ['none', 'omelette', 'salad', 'pastry', 'melon', 'chicken', 'chillies', 'peppers', 'sweets', 'avocados', 'banana', 'cereal bar', 'bread', 'coffee', 'olive oil', 'orange juice', 'pancakes', 'paella', 'fish', 'curry', 'pizza', 'pasta','rice']
+moods = ['headache', 'allergies', 'high', 'low', 'tired', 'energetic', 'wind']
 weather = ['sunny', 'cloudy', 'rainy', 'mixed']
 
 class BookmarkForm(Form):
-    food_word_1 = StringField('add the happy food type you have eaten here:', validators=[DataRequired(), AnyOf(eaten)])
-    food_word_2 = StringField('add the 2nd food type you have eaten here:', validators=[DataRequired(), AnyOf(eaten)])
-    food_word_3 = StringField('add the 3rd food type you have eaten here:', validators=[DataRequired(), AnyOf(eaten)])
+    # time_of_day = StringField('what time of day is it:', validators=[DataRequired(), AnyOf(time)])
+    food_word_1 = StringField('add the food type you have eaten here:', validators=[DataRequired(), AnyOf(eaten)])
+    food_word_2 = StringField('add the 2nd food type you have eaten here:', validators=[Optional(), AnyOf(eaten)])
+    food_word_3 = StringField('add the 3rd food type you have eaten here:', validators=[Optional(), AnyOf(eaten)])
     amount_1 = IntegerField('add the quantity here:', validators=[DataRequired()])
-    amount_2 = IntegerField('add the quantity here:', validators=[DataRequired()])
-    amount_3 = IntegerField('add the quantity here:', validators=[DataRequired()])
-    weather = StringField('what is the weather like now?:', validators=[DataRequired(), AnyOf(weather)])
+    amount_2 = IntegerField('add the quantity here:', validators=[Optional()])
+    amount_3 = IntegerField('add the quantity here:', validators=[Optional()])
+    weather = StringField('what is the weather like now?:', validators=[AnyOf(weather)])
     mood = StringField('Are you feeling good today?:', validators=[DataRequired(), AnyOf(moods)])
 
 class LoginForm(Form):
@@ -25,7 +27,6 @@ class LoginForm(Form):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Keep me logged in')
     submit = SubmitField('Log In')
-
 
 
 class SignupForm(Form):

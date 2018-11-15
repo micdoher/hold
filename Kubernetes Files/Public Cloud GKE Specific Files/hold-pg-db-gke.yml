@@ -23,13 +23,21 @@ spec:
           - name: hold-pg-data
             mountPath: /var/lib/postgresql/data
 #            subPath: pgdata
+
         ports:
         - containerPort: 5432
+
         env:
-        - name: POSTGRES_USER
-          value: pguser
-        - name: POSTGRES_PASSWORD
-          value: password
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: hold-db-user-pass
+                key: username
+          - name: POSTGRES_PW
+            valueFrom:
+              secretKeyRef:
+                name: hold-db-user-pass
+                key: password
 
       volumes:
         - name: hold-pg-data

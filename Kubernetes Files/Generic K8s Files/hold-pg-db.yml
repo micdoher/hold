@@ -21,17 +21,17 @@ spec:
         # command: [ "/bin/bash", "-c", "--" ]
         # args: [ "while true; do sleep 30; done;" ]
 
-        env:
-          - name: POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: hold-db-user-pass
-                key: username
-          - name: POSTGRES_PW
-            valueFrom:
-              secretKeyRef:
-                name: hold-db-user-pass
-                key: password
+        # env:
+        #   - name: POSTGRES_USER
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: hold-db-user-pass
+        #         key: username
+        #   - name: POSTGRES_PW
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: hold-db-user-pass
+        #         key: password
 
 
         # - name: PGDATA
@@ -45,13 +45,17 @@ spec:
         ports:
         - containerPort: 5432
 
-       #Consider deleteing the follow creds as I don't think I need them
-
-        # env:
-        # - name: POSTGRES_USER
-        #   value: pguser
-        # - name: POSTGRES_PASSWORD
-        #   value: password
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: hold-db-user-pass
+                key: username
+          - name: POSTGRES_PW
+            valueFrom:
+              secretKeyRef:
+                name: hold-db-user-pass
+                key: password
 
       volumes:
         - name: hold-pg-data
