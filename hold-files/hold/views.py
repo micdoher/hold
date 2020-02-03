@@ -1,9 +1,9 @@
 from flask import render_template, flash, redirect, url_for, abort, request
 from flask_login import login_required, login_user, logout_user, current_user
-
 from hold import app, db, login_manager
-from forms import BookmarkForm, LoginForm, SignupForm
-from models import User, Bookmark
+from hold.forms import BookmarkForm, LoginForm, SignupForm
+from hold.models import Bookmark, User
+
 
 
 @login_manager.user_loader
@@ -15,7 +15,6 @@ def load_user(userid):
 @app.route('/index')
 def index():
     return render_template('index.html', new_bookmarks=Bookmark.newest(5))
-
 
 @app.route('/add', methods=['GET', 'POST'])
 @login_required

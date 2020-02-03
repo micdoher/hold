@@ -3,15 +3,11 @@ from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.fields import IntegerField
 from wtforms.validators import Length, Email, Regexp, DataRequired, EqualTo,\
     url, ValidationError, AnyOf, Optional
-from hold.models import User, Bookmark
 
+from models import User
 #Create allowable attributes
 time = ['morning', 'lunch', 'dinner', 'bedtime']
-eaten = ['test', 'petit sale', 'ham', 'bacon', 'fried egg', 'fried rice', 'celariac', 'sweet potatoe', 'rocket', 'salmon', 'green lentils', 'red lentils', 'mixed salad', 'croissante', 'fennel', 'empanadas', 'almonds', 'stir-fry', 'baked beans','petit sale' 'hard cheese', 'soft cheese', 'potatoes', 'green beans', 'kiwi', 'pastry', 'biscuits', 'tea', 'squash', 'salad', 'sushi',
-'pine nuts', 'red cabbage', 'miso soup', 'chick peas', 'beer', 'tuna', 'quiche', 'sauerkraut', 'radish', 'duck', 'vegtable soup', 'cous cous', 'tomatoe sauce', 'hazel nuts', 'brazil nuts', 'beef', 'lamb', 'pork', 'red wine', 'white wine', 'eggs', 'crab', 'courgette', 'peas',
-'aubergine', 'crisps', 'tofu', 'gin', 'rum', 'chips', 'cashew nuts', 'sausage roll', 'pancakes', 'omelette', 'salad', 'pastry', 'mixed fruit', 'melon', 'biscuits', 'chicken', 'chillies', 'peppers', 'sweets', 'avocados', 'broad beans', 'peach', 'crackers', 'apricot', 'fig',
-'red beans', 'berries', 'banana', 'cereal bar', 'bread', 'brioche', 'coffee', 'mussels', 'olive oil', 'orange juice', 'pancakes', 'paella', 'fish', 'curry', 'pizza', 'pasta', 'rice', 'milk', 'tortilla', 'burritos', 'dhal curry', 'noodles',
-'seafood', 'pumpkin', 'mushrooms', 'gnocchi']
+eaten = ['croissante', 'fennel', 'almonds', 'stir-fry', 'baked beans', 'carrots', 'hard chese', 'soft chese', 'potatoes', 'green beans', 'kiwi', 'pastry', 'biscuits', 'tea', 'squash', 'salad', 'sushi', 'pine nuts', 'miso soup','chick peas', 'beer', 'tuna', 'quiche', 'sauerkraut', 'radish', 'duck', 'vegtable soup', 'cous cous', 'tomatoe sauce', 'nuts', 'beef', 'lamb', 'pork', 'red wine', 'white wine', 'eggs', 'crab', 'courgette','aubergine', 'crisps', 'chips', 'pancakes', 'omelette', 'salad', 'pastry', 'melon', 'sprouts', 'turnips', 'chicken', 'chillies', 'peppers', 'sweets', 'avocados', 'broad beans', 'peach', 'crackers', 'apricot', 'fig', 'peas', 'red beans', 'berries', 'banana', 'cereal bar', 'bread', 'coffee', 'mussels', 'olive oil', 'orange juice', 'pancakes', 'paella', 'fish', 'curry', 'pizza', 'pasta','rice', 'milk', 'tortilla', 'burritos']
 moods = ['headache', 'allergies', 'tired eyes', 'neutral', 'high', 'low', 'tired', 'energetic', 'wind']
 weather = ['sunny', 'cloudy', 'rainy', 'mixed']
 

@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ngx1
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: ngx1.10.93.140.135.xip.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ngx1
+          servicePort: 80
+
+db.Inventory.update({"_id" : ObjectId("5c474bcbdd8c350623595456")}, {$set: {"color" : "white" }});

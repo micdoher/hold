@@ -5,19 +5,14 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from hold import db
 
-# Consider deleting below
-#eaten = ['chillies','peppers','sweets','avocados', 'banana', 'milk', 'bread', 'nutella', 'olive oil', 'orange juice', 'pancakes', 'paella')]
-# mood = ['high', 'low', 'energetic', 'tired']
-
-
 class Bookmark(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # time_of_day = db.Column(db.Text, nullable=False)
-    food_word_1 = db.Column(db.Text, nullable=False)
+    food_word_1 = db.Column(db.Text, nullable=True)
     food_word_2 = db.Column(db.Text, nullable=True)
     food_word_3 = db.Column(db.Text, nullable=True)
     date = db.Column(db.DateTime, default=datetime.utcnow)
-    amount_1 = db.Column(db.Integer, nullable=False)
+    amount_1 = db.Column(db.Integer, nullable=True)
     amount_2 = db.Column(db.Integer, nullable=True)
     amount_3 = db.Column(db.Integer, nullable=True)
     weather = db.Column(db.Text, nullable=True)

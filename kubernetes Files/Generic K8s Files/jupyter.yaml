@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jupyter-notebook
+  labels:
+    app: jupyter-notebook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jupyter-notebook
+  template:
+    metadata:
+      labels:
+        app: jupyter-notebook
+    spec:
+      containers:
+      - name: minimal-notebook
+        image: jupyter/tensorflow-notebook:latest
+        securityContext:
+          runAsUser: 0
+        env:
+        - name: GRANT_SUDO
+          value: "yes"
+        ports:
+        - containerPort: 8888

@@ -1,0 +1,8 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hold-ingress
+spec:
+  backend:
+    serviceName: hold-core-svc
+    servicePort: 30001

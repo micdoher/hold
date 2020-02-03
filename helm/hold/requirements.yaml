@@ -1,0 +1,10 @@
+dependencies:
+- name: postgresql
+  version: 0.9.4
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  condition: postgresql.enabled
+  tags:
+    - quassel-database
+  # - name: my-local-chart
+  #   repository: file://path/to/charts/
+  #   version: 1.0
