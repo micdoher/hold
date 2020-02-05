@@ -1,8 +1,8 @@
 import os
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+
 
 # force the verification of the env vars or throw an error
 def get_env_variable(name):

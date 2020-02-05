@@ -26,6 +26,11 @@ class BookmarkForm(Form):
     weather = StringField('what is the weather like now?:', validators=[Optional(), AnyOf(weather)])
     mood = StringField('Are you feeling good today?:', validators=[DataRequired(), AnyOf(moods)])
 
+
+class Predict(Form):
+    what_mood = StringField('Add your mood here:', validators=[DataRequired(), AnyOf(moods)])
+
+
 class LoginForm(Form):
     username = StringField('Your Username:', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])

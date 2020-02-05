@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: holdk8s
-        image: micdoher/hold:holdjan15th20202
+        image: micdoher/hold:pandasadd1
 
         imagePullPolicy: "IfNotPresent"
 

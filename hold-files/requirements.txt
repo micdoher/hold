@@ -5,4 +5,6 @@ flask-migrate
 Flask-WTF
 flask_script
 psycopg2
-
+numpy
+pandas
+datetime
