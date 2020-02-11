@@ -12,6 +12,7 @@ ENV POSTGRES_USER=$POSTGRES_USER
 ENV POSTGRES_PW=$POSTGRES_PW
 ENV POSTGRES_DB=holddb
 ENV FLASK_ENV=development
+ENV FLASK_DEBUG=1
 
 # Set the working directory to /hold
 WORKDIR /hold

@@ -2,10 +2,13 @@ from flask import render_template, flash, redirect, url_for, abort, request
 from flask_login import login_required, login_user, logout_user, current_user
 import pandas as pd
 import numpy as np
+import os
 from datetime import datetime
+import psycopg2 as pg
 from hold import app, db, login_manager
 from hold.forms import BookmarkForm, LoginForm, SignupForm, Predict
 from hold.models import Bookmark, User
+from hold.holdenvars import getdburl, get_env_variable
 
 
 @login_manager.user_loader
@@ -47,13 +50,15 @@ def predict():
     form = Predict()
     if form.validate_on_submit():
         what_mood = form.what_mood.data
-        engine = create_engine(DB_URL)
-        df = pd.read_sql_table("SELECT * FROM bookmark", con=engine)
-        s = df['mood'].eq(what_mood).iloc[::-1].cumsum()
-        df = df[df['date'].ge(df['date'].groupby(s).transform('last') - pd.Timedelta(2, unit='d'))]
-        culprit = df[['food_word_1']].mode()
-        return redirect(url_for('index'))
-    return render_template("predict.html", form=form)
+
+    # Pandas Section
+    # df = pd.read_sql_table('bookmark', con=getdburl())
+    # s = df['mood'].eq(what_mood).iloc[::-1].cumsum()
+    # df = df[df['date'].ge(df['date'].groupby(s).transform('last') - pd.Timedelta(2, unit='d'))]
+    # culprit = df[['food_word_1']].mode()
+    culprit = "bread"
+
+    return render_template('predict.html', form=form, culprit=culprit)
 
 
 

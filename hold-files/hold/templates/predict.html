@@ -7,15 +7,19 @@ High or Low day -- Find out what makes you tick!!
 
 {% block content %}
     <section>
-      <h1 style="clear: both">What mood are you in today and what may have caused it?</h1>
+      <h1 style="clear: both">What mood are you in today and what may have caused it init?</h1>
       <form action="" method="post">
           {{form.hidden_tag()}}
           <table>
               {{ render_field(form.what_mood, size=20) }}
           </table>
       </form>
+
+      <h1>Is this the culprit? {{ culprit }}</h1>
+
     </section>
 {% endblock %}
+
 
 {% block sidebar %}
 {% endblock %}
