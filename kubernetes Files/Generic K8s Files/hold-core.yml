@@ -16,15 +16,11 @@ spec:
     spec:
       containers:
       - name: holdk8s
-        image: micdoher/hold:hold7thfeb
-
+        image: micdoher/hold:hold-29th-April-2020
         imagePullPolicy: "IfNotPresent"
-
+        #
         # command: [ "/bin/bash", "-c", "--" ]
         # args: [ "while true; do sleep 30; done;" ]
 
         ports:
           - containerPort: 5000
-      #
-      # command: [ "/bin/bash", "-c", "--" ]
-      # args: [ "while true; do sleep 30; done;" ]

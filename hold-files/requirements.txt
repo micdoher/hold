@@ -8,3 +8,4 @@ psycopg2
 numpy
 pandas
 datetime
+email-validator==1.0.5

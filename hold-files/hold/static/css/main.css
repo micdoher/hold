@@ -225,10 +225,10 @@ input, button {
    ==================== */
 
     nav a {
-        float: left;
-        width: 27%;
-        margin: 0 1.7%;
-        padding: 25px 2%;
+        float: right;
+        width: auto;
+        margin: auto;
+        padding: 16px 5%;
         margin-bottom: 0;
     }
 

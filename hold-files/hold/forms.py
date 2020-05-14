@@ -3,17 +3,31 @@ from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.fields import IntegerField
 from wtforms.validators import Length, Email, Regexp, DataRequired, EqualTo,\
     url, ValidationError, AnyOf, Optional
-from hold.models import User, Bookmark
+from hold.models import User, Bookmark, Food
+from hold import db
+import pandas as pd
+from hold.holdenvars import getdburl, get_env_variable
 
 #Create allowable attributes
+
 time = ['morning', 'lunch', 'dinner', 'bedtime']
-eaten = ['test', 'petit sale', 'ham', 'bacon', 'fried egg', 'fried rice', 'celariac', 'sweet potatoe', 'rocket', 'salmon', 'green lentils', 'red lentils', 'mixed salad', 'croissante', 'fennel', 'empanadas', 'almonds', 'stir-fry', 'baked beans','petit sale' 'hard cheese', 'soft cheese', 'potatoes', 'green beans', 'kiwi', 'pastry', 'biscuits', 'tea', 'squash', 'salad', 'sushi',
-'pine nuts', 'red cabbage', 'miso soup', 'chick peas', 'beer', 'tuna', 'quiche', 'sauerkraut', 'radish', 'duck', 'vegtable soup', 'cous cous', 'tomatoe sauce', 'hazel nuts', 'brazil nuts', 'beef', 'lamb', 'pork', 'red wine', 'white wine', 'eggs', 'crab', 'courgette', 'peas',
-'aubergine', 'crisps', 'tofu', 'gin', 'rum', 'chips', 'cashew nuts', 'sausage roll', 'pancakes', 'omelette', 'salad', 'pastry', 'mixed fruit', 'melon', 'biscuits', 'chicken', 'chillies', 'peppers', 'sweets', 'avocados', 'broad beans', 'peach', 'crackers', 'apricot', 'fig',
-'red beans', 'berries', 'banana', 'cereal bar', 'bread', 'brioche', 'coffee', 'mussels', 'olive oil', 'orange juice', 'pancakes', 'paella', 'fish', 'curry', 'pizza', 'pasta', 'rice', 'milk', 'tortilla', 'burritos', 'dhal curry', 'noodles',
-'seafood', 'pumpkin', 'mushrooms', 'gnocchi']
-moods = ['headache', 'allergies', 'tired eyes', 'neutral', 'high', 'low', 'tired', 'energetic', 'wind']
+moods = ['headache', 'tinnitus', 'allergies', 'tired eyes', 'neutral', 'high', 'low', 'tired', 'energetic', 'wind']
 weather = ['sunny', 'cloudy', 'rainy', 'mixed']
+eaten = ['test', 'petit sale', 'crackers', 'ham', 'bacon', 'fried egg', 'fried rice', 'celariac', 'sweet potatoe', 'rocket', 'salmon', 'green lentils', 'red lentils', 'mixed salad', 'croissante', 'fennel', 'empanadas', 'almonds', 'stir-fry', 'baked beans','petit sale' 'hard cheese',
+'soft cheese', 'potatoes', 'green beans', 'kiwi', 'pastry', 'biscuits', 'tea', 'squash', 'salad', 'sushi',
+'pine nuts', 'red cabbage', 'miso soup', 'chick peas', 'beer', 'yogurt', 'tuna', 'quiche', 'pea soup', 'sauerkraut', 'radish', 'duck', 'parsnips', 'vegetable soup', 'cous cous', 'tomatoe sauce', 'hazel nuts', 'brazil nuts', 'beef', 'lamb', 'pork', 'red wine', 'white wine', 'eggs', 'crab', 'courgette', 'peas',
+'aubergine', 'crisps', 'tofu', 'gin', 'rum', 'chips', 'spinach', 'cashew nuts', 'chorizo', 'mixed vegetables', 'sausage roll', 'pancakes', 'omelette', 'salad', 'pastry', 'mixed fruit', 'melon', 'biscuits', 'chicken', 'chillies', 'peppers', 'sweets', 'avocados', 'broad beans', 'peach', 'crackers', 'apricot', 'fig',
+'red beans', 'berries', 'banana', 'cereal bar', 'bread', 'cauliflower', 'brioche', 'tuna', 'sweet corn', 'pine nuts', 'coffee', 'mussels', 'olive oil', 'squid', 'orange juice', 'pancakes', 'paella', 'fish', 'curry', 'pizza', 'pasta', 'rice', 'milk', 'tortilla', 'burritos', 'dhal curry', 'noodles',
+'seafood', 'pumpkin', 'mushrooms', 'gnocchi']
+
+# The SQLAlchemy way
+# eaten = Food.query.order_by(Food.food_name)
+
+# #The Pandas way
+# df = pd.read_sql_table('food', con=getdburl())
+# eaten = df['food_name']
+# # df.loc[:, ['food_name']
+
 
 class BookmarkForm(Form):
     # time_of_day = StringField('what time of day is it:', validators=[DataRequired(), AnyOf(time)])

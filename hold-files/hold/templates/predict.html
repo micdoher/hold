@@ -6,20 +6,39 @@ High or Low day -- Find out what makes you tick!!
 {%  endblock %}
 
 {% block content %}
-    <section>
-      <h1 style="clear: both">What mood are you in today and what may have caused it init?</h1>
-      <form action="" method="post">
-          {{form.hidden_tag()}}
-          <table>
-              {{ render_field(form.what_mood, size=20) }}
-          </table>
-      </form>
 
-      <h1>Is this the culprit? {{ culprit }}</h1>
+<!doctype html>
+<html>
+<head>
+    <title>Which food could drives your mood?</title>
+</head>
+<div class="result" align="center">
+<form action="{{ url_for('predict') }}" method="POST">
+        <br>
+        <br>
+        <br>Todays Mood:
+        <br>
+        <input name="todays_mood" type="text" required>
+        <br>
+        <br>
+        <input type="submit">
+</div>
+</form>
+<br>
+<br>
+<div class="result" align="center">
+        <!-- <b>{{ culprit }}</b>
+        <br> -->
 
-    </section>
+        <br> Could this food item be the reason?
+           <p style="font-size:20px">{{ result }}</p>
+           <br>
+                 <b>This is for user {{ users_food }}</b>
+</div>
+</html>
+
+
 {% endblock %}
-
 
 {% block sidebar %}
 {% endblock %}

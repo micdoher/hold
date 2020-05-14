@@ -1,8 +1,8 @@
-from flask import render_template, flash, redirect, url_for, abort, request
+from flask import Flask, render_template, flash, redirect, url_for, abort, request
 from flask_login import login_required, login_user, logout_user, current_user
 import pandas as pd
 import numpy as np
-import os
+import os, logging
 from datetime import datetime
 import psycopg2 as pg
 from hold import app, db, login_manager
@@ -10,6 +10,7 @@ from hold.forms import BookmarkForm, LoginForm, SignupForm, Predict
 from hold.models import Bookmark, User
 from hold.holdenvars import getdburl, get_env_variable
 
+logging.warn("top_of_code")
 
 @login_manager.user_loader
 def load_user(userid):
@@ -44,21 +45,43 @@ def add():
 
 
 
-@app.route('/predict', methods=['POST', 'GET'])
-@login_required
+@app.route('/predict', methods=['GET', 'POST'])
+# @login_required
 def predict():
-    form = Predict()
-    if form.validate_on_submit():
-        what_mood = form.what_mood.data
+    # if form.validate_on_submit():
 
-    # Pandas Section
-    # df = pd.read_sql_table('bookmark', con=getdburl())
-    # s = df['mood'].eq(what_mood).iloc[::-1].cumsum()
-    # df = df[df['date'].ge(df['date'].groupby(s).transform('last') - pd.Timedelta(2, unit='d'))]
-    # culprit = df[['food_word_1']].mode()
-    culprit = "bread"
+    if request.method == 'GET':
+        return(render_template('predict.html'))
 
-    return render_template('predict.html', form=form, culprit=culprit)
+    if request.method == 'POST':
+        todays_mood=request.form['todays_mood']
+        df = pd.read_sql_table('bookmark', con=getdburl())
+        s = df['mood'].eq(todays_mood).iloc[::-1].cumsum()
+        df = df[df['date'].ge(df['date'].groupby(s).transform('last') - pd.Timedelta(2, unit='d'))]
+
+        # Need to adjust this so the above code only considers the mood for the current user as currently
+        # it considers the mood of all users, then works 2 days back from there
+
+        users_id = current_user.id
+
+        df_user=df[df.user_id == users_id]
+
+        df_food = df_user.loc[:, ['food_word_1', 'food_word_2', 'food_word_3']]
+
+        culprit=df_food.loc[:,('food_word_1', 'food_word_2', 'food_word_3')].stack().value_counts().index[0]
+
+        if culprit == '' or culprit == 'coffee':
+            culprit=df_food.loc[:,('food_word_1', 'food_word_2', 'food_word_3')].stack().value_counts().index[1]
+        if culprit == '' or culprit == 'coffee':
+            culprit=df_food.loc[:,('food_word_1', 'food_word_2', 'food_word_3')].stack().value_counts().index[2]
+
+        return render_template('predict.html',
+                                     original_input={'todays_mood':todays_mood},
+                                     result=culprit,
+                                     users_food=users_id,
+                                     )
+
+
 
 
 
